@@ -1,0 +1,42 @@
+Package: CommutingZones
+Type: Package
+Title: Commuting Zones to City Mapping
+Version: 0.1.0
+Authors@R: c(
+    person(given = "Monica",
+           family = "Bhole",
+           role = c("aut", "cre"),
+           email = "mbhole@meta.com"),
+    person(given = "Nicolas",
+           family = "Cruces",
+           role = c("aut"),
+           email = "nicocru@meta.com"),
+    person(given = "Arturo",
+           family = "Esquerra",
+           role = c("ctb"),
+           email = "aesquerra@meta.com"),
+    person(given = "Igor",
+           family = "Skokan",
+           role = c("ctb"),
+           email = "igorskokan@meta.com"))
+Description: Commuting zones are geographic areas where people live and work and
+  are useful for understanding local economies, as well as how they differ from 
+  traditional boundaries. These zones are a set of boundary shapes built using 
+  aggregated estimates of home and work locations. Data used to build commuting 
+  zones is aggregated and de-identified.
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+LazyDataCompression: bzip2
+Depends: 
+    R (>= 2.10)
+RoxygenNote: 7.2.3
+Imports:
+    dplyr,
+    ggplot2,
+    ggmap,
+    sf,
+    data.table
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
