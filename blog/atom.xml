@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://facebookincubator.github.io/CommutingZones/blog</id>
+    <id>https://facebookincubator.github.io/blog</id>
     <title>Commuting Zones Blog</title>
     <updated>2021-08-26T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://facebookincubator.github.io/CommutingZones/blog"/>
+    <link rel="alternate" href="https://facebookincubator.github.io/blog"/>
     <subtitle>Commuting Zones Blog</subtitle>
-    <icon>https://facebookincubator.github.io/CommutingZones/img/favicon2.ico</icon>
+    <icon>https://facebookincubator.github.io/img/favicon2.ico</icon>
     <entry>
         <title type="html"><![CDATA[Welcome]]></title>
         <id>welcome</id>
-        <link href="https://facebookincubator.github.io/CommutingZones/blog/welcome"/>
+        <link href="https://facebookincubator.github.io/blog/welcome"/>
         <updated>2021-08-26T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Welcome!]]></summary>
         <author>
