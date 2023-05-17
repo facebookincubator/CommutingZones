@@ -23,4 +23,4 @@ Commuting zones represent areas where we spend the majority of our time. These a
 
 Get started by **[installing the Commuting Zones R package](https://github.com/facebookincubator/CommutingZones)**.
 
-Or try our **[Commuting Zones walkthrough](./Methodology/congratulations)**.
+Or try our **[Commuting Zones walkthrough](./Walkthrough/Walkthrough)**.
