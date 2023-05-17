@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://facebookincubator.github.io/CommutingZones/blog</id>
+    <title>Commuting Zones Blog</title>
+    <updated>2021-08-26T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://facebookincubator.github.io/CommutingZones/blog"/>
+    <subtitle>Commuting Zones Blog</subtitle>
+    <icon>https://facebookincubator.github.io/CommutingZones/img/favicon2.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Welcome]]></title>
+        <id>welcome</id>
+        <link href="https://facebookincubator.github.io/CommutingZones/blog/welcome"/>
+        <updated>2021-08-26T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Welcome!]]></summary>
+        <author>
+            <name>Monica Bhole</name>
+            <uri>https://github.com/mdb374/</uri>
+        </author>
+        <author>
+            <name>Arturo Esquerra</name>
+            <uri>https://github.com/ArturoEsquerra/</uri>
+        </author>
+        <author>
+            <name>Nicolas Cruces</name>
+            <uri>https://github.com/NicolasMatrices-v2</uri>
+        </author>
+    </entry>
+</feed>
