@@ -10,6 +10,7 @@
 #' & long.
 #' @param country_col_name country column name in data in English to make lat
 #' long match easier.
+#' @param gmaps_key string containing your Google Maps API key.
 #'
 #' @export
 #' @examples
@@ -28,12 +29,40 @@
 get_location_lat_long <- function(
     data,
     location_col_name = "location",
-    country_col_name = "country") {
+    country_col_name = "country",
+    gmaps_key = ""
+    ) {
+  # Register API Key
+  if (nchar(gmaps_key) > 0) {
+    ggmap::register_google(key = gmaps_key)
+  }
+
   if (!ggmap::has_google_key()) {
-    message(
-      "To use this method, you need to register your GMaps API key.",
-      "See `ggmap::register_google()`"
-    )
+    stop(message(paste0(
+      "To use this method, you need to register a valid GMaps API key.\n",
+      "See `ggmap::register_google()` or provide a key in the `gmaps_key`",
+      " parameter.")
+    ))
+  }
+
+  # Verify if the provided API key is valid.
+  test_key <- NULL
+  tryCatch(
+    {
+      test_key <- suppressMessages(ggmap::geocode("US"))
+    },
+    warning = function(w) {
+      message(paste0(gsub('\"US\"', '', w$message)), "\n",
+              "Hint: See `ggmap::register_google()` or provide a valid key",
+              " in the `gmaps_key` parameter.")
+    },
+    error = function(e) {
+      message(e)
+    }
+  )
+
+  if (is.null(test_key)) {
+    return(NULL)
   }
 
   if (!location_col_name %in% colnames(data)) {

@@ -7,7 +7,8 @@
 get_location_lat_long(
   data,
   location_col_name = "location",
-  country_col_name = "country"
+  country_col_name = "country",
+  gmaps_key = ""
 )
 }
 \arguments{
@@ -18,6 +19,8 @@ get_location_lat_long(
 
 \item{country_col_name}{country column name in data in English to make lat
 long match easier.}
+
+\item{gmaps_key}{string containing your Google Maps API key.}
 }
 \description{
 Find location latitude and longitude using Gmaps API.
