@@ -23,7 +23,8 @@ df <- data.frame(
 df <- get_location_lat_long(
    df,
    location_col_name = "location",
-   country_col_name = "country"
+   country_col_name = "country",
+   gmaps_key = "mQkzTpiaLYjPqXQBotesgif3EfGL2dbrNVOrogg" #Change for valid key.
 )
 
 cluster_file <- filter_cluster_file(country_name = 'United States')
