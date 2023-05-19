@@ -5,7 +5,7 @@
 #' CommutingZones
 #' @docType package
 #' @name CommutingZones
-#' @importFrom ggmap mutate_geocode has_google_key register_google
+#' @importFrom ggmap geocode has_google_key mutate_geocode register_google
 #' @importFrom ggplot2 aes element_blank element_text geom_sf ggplot labs theme
 #' theme_bw
 #' @importFrom stats time

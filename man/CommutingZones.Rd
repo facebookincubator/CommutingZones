@@ -14,11 +14,11 @@ Commuting zones are geographic areas where people live and work and are useful f
 Authors:
 \itemize{
   \item Nicolas Cruces \email{nicocru@meta.com}
+  \item Arturo Esquerra \email{aesquerra@meta.com}
 }
 
 Other contributors:
 \itemize{
-  \item Arturo Esquerra \email{aesquerra@meta.com} [contributor]
   \item Igor Skokan \email{igorskokan@meta.com} [contributor]
 }
 

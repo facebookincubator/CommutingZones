@@ -22,19 +22,18 @@
 #' df <- get_location_lat_long(
 #'   df,
 #'   location_col_name = "location",
-#'   country_col_name = "country"
+#'   country_col_name = "country",
+#'   gmaps_key = "" # Or change for valid key.
 #' )
 #' }
 get_location_lat_long <- function(
     data,
     location_col_name = "location",
-    country_col_name = "country") {
-  if (!ggmap::has_google_key()) {
-    message(
-      "To use this method, you need to register your GMaps API key.",
-      "See `ggmap::register_google()`"
-    )
-  }
+    country_col_name = "country",
+    gmaps_key = ""
+    ) {
+
+  check_gmaps_key(gmaps_key)
 
   if (!location_col_name %in% colnames(data)) {
     stop(paste0(
@@ -69,4 +68,51 @@ get_location_lat_long <- function(
   lat_long_data$lat <- NULL
 
   return(lat_long_data)
+}
+
+
+#' Register API key if it is not registered.
+#'
+#' @param gmaps_key string containing your Google Maps API key.
+#'
+#' @rdname get_location_lat_long
+#' @export
+check_gmaps_key <- function(gmaps_key = "") {
+  # Register API Key
+  if (nchar(gmaps_key) > 0) {
+    ggmap::register_google(key = gmaps_key)
+  }
+
+  if (!ggmap::has_google_key()) {
+    stop(message(paste0(
+      "To use this method, you need to register a valid GMaps API key.\n",
+      "See `ggmap::register_google()` or provide a key in the `gmaps_key`",
+      " parameter.")
+    ))
+  }
+
+  # Verify if the provided API key is valid.
+  test_api_query <- NULL
+  tryCatch(
+    {
+      test_api_query <- suppressMessages(ggmap::geocode("US"))
+    },
+    warning = function(w) {
+      message(
+        paste0(gsub("\'US\'", "", w$message))
+      )
+    },
+    error = function(e) {
+      message(e)
+    }
+  )
+
+  if (is.null(test_api_query)) {
+    stop(
+      paste0(
+        "Hint: See `ggmap::register_google()` or provide a valid key",
+        " in the `gmaps_key` parameter."
+      )
+    )
+  }
 }

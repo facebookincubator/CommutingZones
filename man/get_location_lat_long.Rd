@@ -2,13 +2,17 @@
 % Please edit documentation in R/find_lat_long.R
 \name{get_location_lat_long}
 \alias{get_location_lat_long}
+\alias{check_gmaps_key}
 \title{Match location units to spatial location.}
 \usage{
 get_location_lat_long(
   data,
   location_col_name = "location",
-  country_col_name = "country"
+  country_col_name = "country",
+  gmaps_key = ""
 )
+
+check_gmaps_key(gmaps_key = "")
 }
 \arguments{
 \item{data}{dataset that holds locations that will be used.}
@@ -18,6 +22,8 @@ get_location_lat_long(
 
 \item{country_col_name}{country column name in data in English to make lat
 long match easier.}
+
+\item{gmaps_key}{string containing your Google Maps API key.}
 }
 \description{
 Find location latitude and longitude using Gmaps API.
@@ -32,7 +38,8 @@ df <- data.frame(
 df <- get_location_lat_long(
   df,
   location_col_name = "location",
-  country_col_name = "country"
+  country_col_name = "country",
+  gmaps_key = "" # Or change for valid key.
 )
 }
 }
