@@ -23,7 +23,8 @@
 #' df <- get_location_lat_long(
 #'   df,
 #'   location_col_name = "location",
-#'   country_col_name = "country"
+#'   country_col_name = "country",
+#'   gmaps_key = "insert_your_api_key"
 #' )
 #' }
 get_location_lat_long <- function(
