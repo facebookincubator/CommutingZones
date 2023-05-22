@@ -34,7 +34,7 @@ const features = [
       <>
         Traditional commuting zones are developed using census data which is
         updated every 10 years in the U.S, but these zones can be updated every
-        few months to capture local economic and commuting changes.
+        six months to capture local economic and commuting changes.
       </>
     ),
   },
@@ -206,11 +206,10 @@ export default function Home() {
                 </a>
               </div>
               <div className={clsx('col col--6', styles.descriptionSection)}>
-                <h2>GeoLift: Simplicity in Geo-Experimentation</h2>
-                <p className={styles.descriptionSectionText}>From identifying where to run your
-                experiment and running the power calculations, to measuring the Lift from your
-                marketing campaigns, GeoLift has the tools you need to understanding the true
-                incremental value of your marketing and help businesses make better decisions. </p>
+                <h2>Granular Zones that Reflect Local Economies</h2>
+                <p className={styles.descriptionSectionText}>Commuting Zones provide
+                high-granularity geographical areas that correlate closely with population
+                centers, infrastructure (roads, bridges, etc.), and businesses! </p>
               </div>
             </div>
           </div>
