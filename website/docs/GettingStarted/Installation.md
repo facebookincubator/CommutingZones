@@ -29,8 +29,8 @@ install.packages("remotes")
 remotes::install_github("facebookincubator/CommutingZones")
 ```
 
-Finally, to run geo-experiments using the Commuting Zones, we recommend downloading and installing `GeoLift`.
+Finally, to run geo-experiments using the Commuting Zones, we recommend downloading and installing `GeoLift`. Detailed instructions on how to get it can be found [on GeoLift's website](https://facebookincubator.github.io/GeoLift/docs/GettingStarted/InstallingR).
 
 ```
-remotes::install_github("facebookincubator/GeoLift")
+library(GeoLift)
 ```

@@ -15,17 +15,6 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
-const featuresIntro = [
-  {
-    title: '',
-    imageUrl: 'img/CZ.svg',
-    description: (
-      <>
-      </>
-    ),
-  },
-];
-
 const features = [
   {
     title: 'Timeliness',
@@ -44,7 +33,7 @@ const features = [
     description: (
       <>
         With over three billion people using Meta services, our team has built the
-        first comprehensive estimate of commuting zones at an international level.
+        first comprehensive estimate of Commuting Zones at an international level.
       </>
     ),
   },
@@ -53,8 +42,8 @@ const features = [
     imageUrl: 'img/undraw_private_data_re_4eab.svg',
     description: (
       <>
-        These zones are a set of boundary shapes built using aggregated estimates of
-        home and work locations. Data used to build commuting zones is aggregated and
+        These Zones are a set of boundary shapes built using aggregated estimates of
+        home and work locations. Data used to build Commuting Zones is aggregated and
         de-identified.
       </>
     ),
@@ -90,7 +79,7 @@ const featuresTwo = [
 function FeatureIntro({imageUrl, title, description}) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <div className={clsx('col col--10', styles.feature)}>
+    <div className={clsx('col col--5', styles.feature)}>
       {imgUrl && (
         <div className="text--center">
           <img className={styles.featureImage} src={imgUrl} alt={title} />
@@ -232,22 +221,19 @@ export default function Home() {
           </section>
         )}
 
-        {featuresIntro && featuresIntro.length > 0 && (
-          <section className={styles.footerfeatures}>
-            <div className="container">
-              <div className="row">
-                {featuresIntro.map(({title, imageUrl, description}) => (
-                  <FeatureIntro
-                    key={title}
-                    title={title}
-                    imageUrl={imageUrl}
-                    description={description}
-                  />
-                ))}
+        <div className="padding-vert--xl">
+          <div className="container">
+            <div className="row">
+              <div className={clsx('col col--4', styles.descriptionSection)}>
+              </div>
+              <div class="map">
+                <a href="#">
+                  <img src="img/CZ_wText.svg" width="400"/>
+                </a>
               </div>
             </div>
-          </section>
-        )}
+          </div>
+        </div>
 
       </main>
     </Layout>
