@@ -2,6 +2,61 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
+#' The Commuting Zones main function to get location clusters.
+#'
+#' @description
+#' Match all location points to their clusters defined by user movement between
+#' cities. The main wrapper function.
+#' @inheritParams get_location_lat_long
+#' @inheritParams filter_cluster_file
+#'
+#' @return
+#' A data frame where each row represents a location in location_data and their
+#' specific cluster.
+#'
+#' @export
+#' @examples
+#' \dontrun{
+#' location_df <- data.frame(
+#'   location = c("Austin", "Los Angeles", "Buenos Aires"),
+#'   country = c("United States", "United States", "Argentina")
+#' )
+#'
+#' matched_df <- commuting_zones(
+#'   data = location_df,
+#'   location_col_name = "location",
+#'   country_col_name = "country",
+#'   gmaps_key = "Enter Your Google API Key Here"
+#' )
+#'
+#' head(matched_df$matched_spdf)
+#' plot(matched_df)
+#' }
+commuting_zones <- function(
+    data,
+    location_col_name,
+    country_col_name,
+    gmaps_key = "") {
+  location_data <- get_location_lat_long(
+    data,
+    location_col_name,
+    country_col_name,
+    gmaps_key
+  )
+
+  country_name <- unique(data[, country_col_name])
+
+  cluster_data <- filter_cluster_file(country_name)
+
+  matched_df_list <- location_to_cluster_match(
+    location_data,
+    cluster_data
+  )
+
+  return(matched_df_list)
+}
+
+
 #' Load Commuting Zones Clusters from Data For Good.
 #'
 #' @description This method loads the Community Zones Clusters CSV into memory
@@ -22,12 +77,15 @@ filter_cluster_file <- function(
 
   if (!is.null(country_name)) {
     country_name <- tolower(country_name)
-    s_df <- s_df[tolower(s_df$country) == country_name, ]
+    if (!all(country_name %in% tolower(s_df$country))) {
+      stop("country_name allowed: ", paste(sort(unique(s_df$country)), collapse = ", "))
+    }
+    s_df <- s_df[tolower(s_df$country) %in% country_name, ]
   } else {
     stop(paste0(
       "Please specify country_name to be able to filter the Commuting Zones",
-      "data.")
-      )
+      "data."
+    ))
   }
 
   return(s_df)
@@ -44,10 +102,6 @@ filter_cluster_file <- function(
 #' @param cluster_data data.frame object with all polygons.  Each row represents
 #' a different cluster with an sf::POLYGON or sf::MULTIPOLYGON object that has
 #' the points that are joined to form that cluster.
-#' @param longitude_col_name name of the longitude column in the location_data
-#' data.frame.
-#' @param latitude_col_name name of the latitude column in the location_data
-#' data.frame.
 #'
 #' @return
 #' A data frame where each row represents a location in location_data and their
@@ -57,24 +111,23 @@ filter_cluster_file <- function(
 #' @examples
 #' \dontrun{
 #' location_df <- data.frame(
-#'   location = c('Austin', 'New York'),
-#'   country_name = c('United States', 'United States')
+#'   location = c("Austin", "Los Angeles", "Buenos Aires"),
+#'   country = c("United States", "United States", "Argentina")
 #' )
 #' location_df <- get_location_lat_long(
 #'   location_df,
-#'   location_col_name='location',
-#'   country_col_name='country_name')
-#' cluster_file <- filter_cluster_file(country_name = 'United States')
+#'   location_col_name = "location",
+#'   country_col_name = "country"
+#' )
+#' cluster_file <- filter_cluster_file(country_name = "United States")
 #'
 #' matched_df <- location_to_cluster_match(
 #'   location_df, cluster_file
+#' )
 #' }
 location_to_cluster_match <- function(
     location_data,
-    cluster_data,
-    longitude_col_name = "longitude",
-    latitude_col_name = "latitude") {
-
+    cluster_data) {
   spdf <- sf::st_as_sf(
     cluster_data[, !colnames(cluster_data) %in% c("country")]
   )
@@ -82,7 +135,8 @@ location_to_cluster_match <- function(
 
   location_data <- sf::st_as_sf(
     location_data,
-    coords = c(longitude_col_name, latitude_col_name))
+    coords = c("longitude", "latitude")
+  )
 
   matched_spdf <- sf::st_join(
     location_data, spdf
@@ -109,7 +163,8 @@ post_msgs <- function(df) {
   nulled_rows <- sum(is.na(df$fbcz_id_num))
   if (nulled_rows == 0) {
     message(
-      "All locations were matched successfully to a Commuting Zones cluster.")
+      "All locations were matched successfully to a Commuting Zones cluster."
+    )
   } else {
     message(
       paste0(

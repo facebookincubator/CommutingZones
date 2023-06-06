@@ -7,14 +7,10 @@ Authors@R: c(
            family = "Bhole",
            role = c("aut", "cre"),
            email = "mbhole@meta.com"),
-    person(given = "Nicolas",
-           family = "Cruces",
+    person(given = "Gufeng",
+           family = "Zhou",
            role = c("aut"),
-           email = "nicocru@meta.com"),
-    person(given = "Arturo",
-           family = "Esquerra",
-           role = c("aut"),
-           email = "aesquerra@meta.com"),
+           email = "gufeng@meta.com"),
     person(given = "Igor",
            family = "Skokan",
            role = c("ctb"),
@@ -36,7 +32,7 @@ Imports:
     ggplot2,
     ggmap,
     sf,
-    data.table
+    rlang
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

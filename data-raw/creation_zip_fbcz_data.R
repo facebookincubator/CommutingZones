@@ -10,4 +10,5 @@ usethis::use_data(
   zip_to_cz,
   overwrite = TRUE,
   compress = "bzip2",
-  internal = FALSE)
+  internal = FALSE
+)
