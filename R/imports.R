@@ -11,9 +11,9 @@
 #' @importFrom stats time
 #' @importFrom utils data
 #' @importFrom dplyr sym group_by summarize left_join mutate distinct ungroup
-#' "%>%"
-#' @importFrom data.table :=
+#' "%>%" rename select
 #' @importFrom sf st_as_sf st_join st_is_valid
+#' @importFrom rlang .data
 "_PACKAGE"
 
 utils::globalVariables(

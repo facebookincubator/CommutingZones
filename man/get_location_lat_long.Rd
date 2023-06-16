@@ -32,8 +32,8 @@ Find location latitude and longitude using Gmaps API.
 \dontrun{
 # Example dataset:
 df <- data.frame(
-  'location' = c("Austin", "Toronto"),
-  'country' = c("United States", "Canada")
+  "location" = c("Austin", "Toronto"),
+  "country" = c("United States", "Canada")
 )
 df <- get_location_lat_long(
   df,

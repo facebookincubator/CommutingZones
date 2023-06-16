@@ -12,31 +12,28 @@ install.packages("remotes")
 remotes::install_github("facebookincubator/CommutingZones")
 ```
 
+## Create Google Maps API key 
+Visit [this](https://developers.google.com/maps/documentation/maps-static/get-api-key/) page and follow the instruction to obtain the API key.
+
 ## Demo
 ```{r}
 library(CommutingZones)
 
-df <- data.frame(
-   'location' = c("Austin", "Los Angeles", "Buenos Aires"),
-   'country' = c("United States", "United States", "Argentina")
-)
-df <- get_location_lat_long(
-   df,
-   location_col_name = "location",
-   country_col_name = "country",
-   gmaps_key = "" # Or Change for valid key.
+location_df <- data.frame(
+  location = c("Austin", "Los Angeles", "Buenos Aires"),
+  country = c("United States", "United States", "Argentina")
 )
 
-cluster_file <- filter_cluster_file(country_name = 'United States')
-
-matched_df_list <- location_to_cluster_match(
-   df,
-   cluster_file
+matched_df <- commuting_zones(
+  data = location_df,
+  location_col_name = 'location',
+  country_col_name = 'country',
+  gmaps_key = 'Enter the Google Maps API key here'
 )
 
-head(matched_df_list$matched_spdf)
+head(matched_df$matched_spdf)
+plot(matched_df)
 
-plot(matched_df_list)
 ```
 
 ## License
