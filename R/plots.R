@@ -22,14 +22,16 @@ plot.location_to_cluster_match <- function(x, ...) {
       axis.ticks = element_blank(),
       axis.title = element_blank(),
       plot.title = element_text(hjust = 0.5),
-      plot.subtitle = element_text(hjust = 0.5))
+      plot.subtitle = element_text(hjust = 0.5)
+    )
 
   cluster_location_plot <- ggplot() +
     geom_sf(
       data = cluster_file,
       aes(geometry = geography),
       fill = NA,
-      color = "#373472") +
+      color = "#373472"
+    ) +
     map_settings +
     geom_sf(
       data = matched_df,

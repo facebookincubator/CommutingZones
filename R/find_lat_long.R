@@ -16,8 +16,8 @@
 #' \dontrun{
 #' # Example dataset:
 #' df <- data.frame(
-#'   'location' = c("Austin", "Toronto"),
-#'   'country' = c("United States", "Canada")
+#'   "location" = c("Austin", "Toronto"),
+#'   "country" = c("United States", "Canada")
 #' )
 #' df <- get_location_lat_long(
 #'   df,
@@ -30,9 +30,7 @@ get_location_lat_long <- function(
     data,
     location_col_name = "location",
     country_col_name = "country",
-    gmaps_key = ""
-    ) {
-
+    gmaps_key = "") {
   check_gmaps_key(gmaps_key)
 
   if (!location_col_name %in% colnames(data)) {
@@ -40,7 +38,8 @@ get_location_lat_long <- function(
       "Please specify the proper name of the location column for data",
       " using the location_col_name parameter.",
       "\n\nHint: run ?get_location_lat_long and see example section for ",
-      "illustrative dataset"))
+      "illustrative dataset"
+    ))
   }
 
   if (!country_col_name %in% colnames(data)) {
@@ -48,7 +47,8 @@ get_location_lat_long <- function(
       "Please specify the proper name of the country column for data",
       " using the country_col_name parameter.",
       "\n\nHint: run ?get_location_lat_long and see example section for ",
-      "illustrative dataset"))
+      "illustrative dataset"
+    ))
   }
 
   data$location_country <- paste0(
@@ -58,14 +58,11 @@ get_location_lat_long <- function(
     dplyr::distinct(location, location_country) %>%
     ggmap::mutate_geocode(location_country) %>%
     merge(
-      data, by = c("location", "location_country")
-    )
-
-  lat_long_data$longitude <- lat_long_data$lon
-  lat_long_data$latitude <- lat_long_data$lat
-  lat_long_data$location_country <- NULL
-  lat_long_data$lon <- NULL
-  lat_long_data$lat <- NULL
+      data,
+      by = c("location", "location_country")
+    ) %>%
+    rename(longitude = .data$lon, latitude = .data$lat) %>%
+    select(.data$location, .data$country, .data$longitude, .data$latitude)
 
   return(lat_long_data)
 }
@@ -86,9 +83,8 @@ check_gmaps_key <- function(gmaps_key = "") {
   if (!ggmap::has_google_key()) {
     stop(message(paste0(
       "To use this method, you need to register a valid GMaps API key.\n",
-      "See `ggmap::register_google()` or provide a key in the `gmaps_key`",
-      " parameter.")
-    ))
+      "Get the key here https://developers.google.com/maps/documentation/maps-static/get-api-key/"
+    )))
   }
 
   # Verify if the provided API key is valid.
