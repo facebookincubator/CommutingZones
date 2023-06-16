@@ -14,7 +14,16 @@ Authors@R: c(
     person(given = "Igor",
            family = "Skokan",
            role = c("ctb"),
-           email = "igorskokan@meta.com"))
+           email = "igorskokan@meta.com"),
+    person(given = "Arturo",
+           family = "Esquerra",
+           role = c("aut"),
+           email = "aesquerrac@gmail.com"),
+    person(given = "Nicolas",
+           family = "Cruces",
+           role = c("aut"),
+           email = "nicolascruces1994@gmail.com")
+           )
 Description: Commuting zones are geographic areas where people live and work and
   are useful for understanding local economies, as well as how they differ from 
   traditional boundaries. These zones are a set of boundary shapes built using 
