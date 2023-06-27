@@ -2,14 +2,14 @@
 <rss version="2.0">
     <channel>
         <title>Commuting Zones Blog</title>
-        <link>https://facebookincubator.github.io/blog</link>
+        <link>https://facebookincubator.github.io/CommutingZones/blog</link>
         <description>Commuting Zones Blog</description>
         <lastBuildDate>Thu, 26 Aug 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
             <title><![CDATA[Welcome]]></title>
-            <link>https://facebookincubator.github.io/blog/welcome</link>
+            <link>https://facebookincubator.github.io/CommutingZones/blog/welcome</link>
             <guid>welcome</guid>
             <pubDate>Thu, 26 Aug 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[Welcome!]]></description>
