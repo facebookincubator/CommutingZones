@@ -13,7 +13,7 @@
   title: 'Commuting Zones',
   tagline: 'Data-driven boundaries to understand local economies.',
   url: 'https://facebookincubator.github.io/',
-  baseUrl: '/',
+  baseUrl: '/CommutingZones/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon2.ico',
