@@ -11,3 +11,4 @@ sidebar_position: 3
 - Nicolas Cruces
 - Arturo Esquerra
 - Igor Skokan
+- Gufeng Zhou

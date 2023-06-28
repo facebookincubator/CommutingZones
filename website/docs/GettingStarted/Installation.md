@@ -27,10 +27,9 @@ To install the package, simply run the following commands.
 ```
 install.packages("remotes")
 remotes::install_github("facebookincubator/CommutingZones")
+library(CommutingZones)
 ```
 
-Finally, to run geo-experiments using the Commuting Zones, we recommend downloading and installing `GeoLift`. Detailed instructions on how to get it can be found [on GeoLift's website](https://facebookincubator.github.io/GeoLift/docs/GettingStarted/InstallingR).
+## 3. Using Commuting Zones for Geo-experiments
 
-```
-library(GeoLift)
-```
+Finally, to run geo-experiments using the Commuting Zones, we recommend downloading and installing `GeoLift`, an open source R package from Meta Marketing Science. Detailed instructions on how to get it can be found on [this](https://facebookincubator.github.io/CommutingZones/docs/Walkthrough/CZExperiment_GeoLift) chapter as well as [on GeoLift's website](https://facebookincubator.github.io/GeoLift/docs/GettingStarted/InstallingR).
