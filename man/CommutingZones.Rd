@@ -13,8 +13,9 @@ Commuting zones are geographic areas where people live and work and are useful f
 
 Authors:
 \itemize{
-  \item Nicolas Cruces \email{nicocru@meta.com}
-  \item Arturo Esquerra \email{aesquerra@meta.com}
+  \item Nicolas Cruces \email{nicolascruces1994@gmail.com}
+  \item Arturo Esquerra \email{aesquerrac@gmail.com}
+  \item Gufeng Zhou \email{gufeng@meta.com}
 }
 
 Other contributors:

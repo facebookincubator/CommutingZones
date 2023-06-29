@@ -1,12 +1,21 @@
 Package: CommutingZones
 Type: Package
 Title: Commuting Zones to City Mapping
-Version: 0.1.0
+Version: 0.1.1
+Date: 2023-06-15
 Authors@R: c(
     person(given = "Monica",
            family = "Bhole",
            role = c("aut", "cre"),
            email = "mbhole@meta.com"),
+    person(given = "Nicolas",
+           family = "Cruces",
+           role = c("aut"),
+           email = "nicolascruces1994@gmail.com"),
+    person(given = "Arturo",
+           family = "Esquerra",
+           role = c("aut"),
+           email = "aesquerrac@gmail.com"),
     person(given = "Gufeng",
            family = "Zhou",
            role = c("aut"),
@@ -14,16 +23,8 @@ Authors@R: c(
     person(given = "Igor",
            family = "Skokan",
            role = c("ctb"),
-           email = "igorskokan@meta.com"),
-    person(given = "Arturo",
-           family = "Esquerra",
-           role = c("aut"),
-           email = "aesquerrac@gmail.com"),
-    person(given = "Nicolas",
-           family = "Cruces",
-           role = c("aut"),
-           email = "nicolascruces1994@gmail.com")
-           )
+           email = "igorskokan@meta.com")
+   )
 Description: Commuting zones are geographic areas where people live and work and
   are useful for understanding local economies, as well as how they differ from 
   traditional boundaries. These zones are a set of boundary shapes built using 
