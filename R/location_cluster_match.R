@@ -26,7 +26,7 @@
 #'   data = location_df,
 #'   location_col_name = "location",
 #'   country_col_name = "country",
-#'   gmaps_key = "Enter Your Google API Key Here"
+#'   gmaps_key = "Enter Your Google API Key Here" # Not required
 #' )
 #'
 #' head(matched_df$matched_spdf)
@@ -36,7 +36,7 @@ commuting_zones <- function(
     data,
     location_col_name,
     country_col_name,
-    gmaps_key = "") {
+    gmaps_key = NULL) {
   location_data <- get_location_lat_long(
     data,
     location_col_name,
@@ -71,8 +71,7 @@ commuting_zones <- function(
 #' that form the cluster).
 #'
 #' @export
-filter_cluster_file <- function(
-    country_name) {
+filter_cluster_file <- function(country_name) {
   s_df <- sf::st_as_sf(CommutingZones::cz_data, wkt = "geography")
 
   if (!is.null(country_name)) {
@@ -133,16 +132,18 @@ location_to_cluster_match <- function(
   )
   spdf <- spdf[sf::st_is_valid(spdf), ]
 
-  location_data <- sf::st_as_sf(
-    location_data,
-    coords = c("longitude", "latitude")
-  )
-
-  matched_spdf <- sf::st_join(
-    location_data, spdf
-  )
-
-  post_msgs(matched_spdf)
+  if (!is.null(location_data)) {
+    location_data <- sf::st_as_sf(
+      location_data,
+      coords = c("longitude", "latitude")
+    )
+    matched_spdf <- sf::st_join(
+      location_data, spdf
+    )
+    post_msgs(matched_spdf) 
+  } else {
+    matched_spdf <- NULL
+  }
 
   output <- list(
     matched_spdf = matched_spdf,

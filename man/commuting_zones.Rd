@@ -4,7 +4,7 @@
 \alias{commuting_zones}
 \title{The Commuting Zones main function to get location clusters.}
 \usage{
-commuting_zones(data, location_col_name, country_col_name, gmaps_key = "")
+commuting_zones(data, location_col_name, country_col_name, gmaps_key = NULL)
 }
 \arguments{
 \item{data}{dataset that holds locations that will be used.}
@@ -36,7 +36,7 @@ matched_df <- commuting_zones(
   data = location_df,
   location_col_name = "location",
   country_col_name = "country",
-  gmaps_key = "Enter Your Google API Key Here"
+  gmaps_key = "Enter Your Google API Key Here" # Not required
 )
 
 head(matched_df$matched_spdf)
