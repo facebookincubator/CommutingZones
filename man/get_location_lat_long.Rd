@@ -9,7 +9,9 @@ get_location_lat_long(
   data,
   location_col_name = "location",
   country_col_name = "country",
-  gmaps_key = NULL
+  gmaps_key = NULL,
+  quiet = FALSE,
+  ...
 )
 
 check_gmaps_key(gmaps_key = NULL)
@@ -24,6 +26,10 @@ check_gmaps_key(gmaps_key = NULL)
 long match easier.}
 
 \item{gmaps_key}{string containing your Google Maps API key.}
+
+\item{quiet}{Boolean. Keep quiet? If not, show warnings and messages.}
+
+\item{...}{Additional parameters}
 }
 \description{
 Find location latitude and longitude using Gmaps API.

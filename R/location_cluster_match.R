@@ -36,13 +36,14 @@ commuting_zones <- function(
     data,
     location_col_name,
     country_col_name,
-    gmaps_key = NULL) {
+    gmaps_key = NULL,
+    ...) {
   location_data <- get_location_lat_long(
     data,
     location_col_name,
     country_col_name,
-    gmaps_key
-  )
+    gmaps_key,
+    ...)
 
   country_name <- unique(data[, country_col_name])
 
@@ -98,17 +99,18 @@ filter_cluster_file <- function(country_name) {
 #' cities.
 #' @param location_data data.frame object that holds the location name,
 #' latitude and longitude for all locations.
-#' @param cluster_data data.frame object with all polygons.  Each row represents
-#' a different cluster with an sf::POLYGON or sf::MULTIPOLYGON object that has
-#' the points that are joined to form that cluster.
+#' @param cluster_data data.frame object with all polygons. Each row represents
+#' a different cluster with an \code{sf::POLYGON} or \code{sf::MULTIPOLYGON}
+#' object that has the points that are joined to form that cluster.
+#' @param longitude_col_name,latitude_col_name Character. Names of the columns
+#' containing the longitude and latitud coordinates in \code{location_data}.
 #'
 #' @return
-#' A data frame where each row represents a location in location_data and their
-#' specific cluster.
+#' A data frame where each row represents a location in \code{location_data}
+#' and their specific cluster.
 #'
 #' @export
 #' @examples
-#' \dontrun{
 #' location_df <- data.frame(
 #'   location = c("Austin", "Los Angeles", "Buenos Aires"),
 #'   country = c("United States", "United States", "Argentina")
@@ -119,23 +121,25 @@ filter_cluster_file <- function(country_name) {
 #'   country_col_name = "country"
 #' )
 #' cluster_file <- filter_cluster_file(country_name = "United States")
-#'
+#' 
 #' matched_df <- location_to_cluster_match(
 #'   location_df, cluster_file
 #' )
-#' }
 location_to_cluster_match <- function(
     location_data,
-    cluster_data) {
+    cluster_data,
+    longitude_col_name = "longitude",
+    latitude_col_name = "latitude"){
   spdf <- sf::st_as_sf(
     cluster_data[, !colnames(cluster_data) %in% c("country")]
   )
   spdf <- spdf[sf::st_is_valid(spdf), ]
 
-  if (!is.null(location_data)) {
+  if (all(c(longitude_col_name, latitude_col_name) %in%
+          colnames(location_data))) {
     location_data <- sf::st_as_sf(
       location_data,
-      coords = c("longitude", "latitude")
+      coords = c(longitude_col_name, latitude_col_name)
     )
     matched_spdf <- sf::st_join(
       location_data, spdf
@@ -144,13 +148,11 @@ location_to_cluster_match <- function(
   } else {
     matched_spdf <- NULL
   }
-
   output <- list(
     matched_spdf = matched_spdf,
     cluster_file = spdf
   )
   class(output) <- c("location_to_cluster_match", class(output))
-
   return(output)
 }
 

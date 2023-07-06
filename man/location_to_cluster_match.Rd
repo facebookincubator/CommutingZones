@@ -5,7 +5,12 @@
 \alias{plot.location_to_cluster_match}
 \title{Match all locations to their cluster, via lat and long.}
 \usage{
-location_to_cluster_match(location_data, cluster_data)
+location_to_cluster_match(
+  location_data,
+  cluster_data,
+  longitude_col_name = "longitude",
+  latitude_col_name = "latitude"
+)
 
 \method{plot}{location_to_cluster_match}(x, ...)
 }
@@ -13,24 +18,26 @@ location_to_cluster_match(location_data, cluster_data)
 \item{location_data}{data.frame object that holds the location name,
 latitude and longitude for all locations.}
 
-\item{cluster_data}{data.frame object with all polygons.  Each row represents
-a different cluster with an sf::POLYGON or sf::MULTIPOLYGON object that has
-the points that are joined to form that cluster.}
+\item{cluster_data}{data.frame object with all polygons. Each row represents
+a different cluster with an \code{sf::POLYGON} or \code{sf::MULTIPOLYGON}
+object that has the points that are joined to form that cluster.}
+
+\item{longitude_col_name, latitude_col_name}{Character. Names of the columns
+containing the longitude and latitud coordinates in \code{location_data}.}
 
 \item{x}{\code{location_to_cluster_match()} output.}
 
 \item{...}{additional arguments}
 }
 \value{
-A data frame where each row represents a location in location_data and their
-specific cluster.
+A data frame where each row represents a location in \code{location_data}
+and their specific cluster.
 }
 \description{
 Match all location points to their clusters defined by user movement between
 cities.
 }
 \examples{
-\dontrun{
 location_df <- data.frame(
   location = c("Austin", "Los Angeles", "Buenos Aires"),
   country = c("United States", "United States", "Argentina")
@@ -45,5 +52,4 @@ cluster_file <- filter_cluster_file(country_name = "United States")
 matched_df <- location_to_cluster_match(
   location_df, cluster_file
 )
-}
 }

@@ -10,6 +10,8 @@
 #' & long.
 #' @param country_col_name country column name in data in English to make lat
 #' long match easier.
+#' @param quiet Boolean. Keep quiet? If not, show warnings and messages.
+#' @param ... Additional parameters
 #'
 #' @export
 #' @examples
@@ -30,7 +32,9 @@ get_location_lat_long <- function(
     data,
     location_col_name = "location",
     country_col_name = "country",
-    gmaps_key = NULL) {
+    gmaps_key = NULL,
+    quiet = FALSE,
+    ...) {
   check_gmaps_key(gmaps_key)
   if (isTRUE(nchar(gmaps_key) > 0)) {
     if (!location_col_name %in% colnames(data)) {
@@ -65,9 +69,9 @@ get_location_lat_long <- function(
       select(.data$location, .data$country, .data$longitude, .data$latitude)
     return(lat_long_data)
   }
-  return(invisible(NULL))
+  if (!quiet) warning("No valid 'gmaps_key' provided so can't add coordinates")
+  return(data)
 }
-
 
 #' Register API key if it is not registered.
 #'

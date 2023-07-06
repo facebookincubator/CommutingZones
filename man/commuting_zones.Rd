@@ -4,7 +4,13 @@
 \alias{commuting_zones}
 \title{The Commuting Zones main function to get location clusters.}
 \usage{
-commuting_zones(data, location_col_name, country_col_name, gmaps_key = NULL)
+commuting_zones(
+  data,
+  location_col_name,
+  country_col_name,
+  gmaps_key = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{dataset that holds locations that will be used.}
@@ -16,6 +22,8 @@ commuting_zones(data, location_col_name, country_col_name, gmaps_key = NULL)
 long match easier.}
 
 \item{gmaps_key}{string containing your Google Maps API key.}
+
+\item{...}{Additional parameters}
 }
 \value{
 A data frame where each row represents a location in location_data and their

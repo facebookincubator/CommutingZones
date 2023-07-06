@@ -1,8 +1,8 @@
 Package: CommutingZones
 Type: Package
 Title: Commuting Zones to City Mapping
-Version: 0.1.1
-Date: 2023-06-15
+Version: 0.1.2.9000
+Date: 2023-07-06
 Authors@R: c(
     person(given = "Monica",
            family = "Bhole",
@@ -20,6 +20,10 @@ Authors@R: c(
            family = "Zhou",
            role = c("aut"),
            email = "gufeng@meta.com"),
+    person(given = "Bernardo",
+           family = "Lares",
+           role = c("aut"),
+           email = "laresbernardo@gmail.com"),
     person(given = "Igor",
            family = "Skokan",
            role = c("ctb"),
