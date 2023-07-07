@@ -35,8 +35,8 @@ get_location_lat_long <- function(
     gmaps_key = NULL,
     quiet = FALSE,
     ...) {
-  check_gmaps_key(gmaps_key)
-  if (isTRUE(nchar(gmaps_key) > 0)) {
+  has_key <- check_gmaps_key(gmaps_key, quiet)
+  if (has_key) {
     if (!location_col_name %in% colnames(data)) {
       stop(paste0(
         "Please specify the proper name of the location column for data",
@@ -45,7 +45,7 @@ get_location_lat_long <- function(
         "illustrative dataset"
       ))
     }
-    
+
     if (!country_col_name %in% colnames(data)) {
       stop(paste0(
         "Please specify the proper name of the country column for data",
@@ -54,23 +54,26 @@ get_location_lat_long <- function(
         "illustrative dataset"
       ))
     }
-    
+
     data$location_country <- paste0(
       data[, location_col_name], ", ", data[, country_col_name]
     )
-    lat_long_data <- data %>%
-      dplyr::distinct(location, location_country) %>%
-      ggmap::mutate_geocode(location_country) %>%
-      merge(
-        data,
-        by = c("location", "location_country")
-      ) %>%
-      rename(longitude = .data$lon, latitude = .data$lat) %>%
-      select(.data$location, .data$country, .data$longitude, .data$latitude)
+
+    lat_long_data <- suppressMessages(
+      data %>%
+        dplyr::distinct(location, location_country) %>%
+        ggmap::mutate_geocode(location_country) %>%
+        merge(
+          data,
+          by = c("location", "location_country")
+        ) %>%
+        rename(longitude = .data$lon, latitude = .data$lat) %>%
+        select(.data$location, .data$country, .data$longitude, .data$latitude)
+    )
     return(lat_long_data)
+  } else {
+    return(data)
   }
-  if (!quiet) warning("No valid 'gmaps_key' provided so can't add coordinates")
-  return(data)
 }
 
 #' Register API key if it is not registered.
@@ -79,18 +82,12 @@ get_location_lat_long <- function(
 #'
 #' @rdname get_location_lat_long
 #' @export
-check_gmaps_key <- function(gmaps_key = NULL) {
-  # Register API Key
+check_gmaps_key <- function(gmaps_key = NULL, quiet = FALSE) {
+  # Test the provided key
   if (isTRUE(nchar(gmaps_key) > 0)) {
+    # Register API Key
     ggmap::register_google(key = gmaps_key)
-    
-    if (!ggmap::has_google_key()) {
-      stop(message(paste0(
-        "To use this method, you need to register a valid GMaps API key.\n",
-        "Get the key here https://developers.google.com/maps/documentation/maps-static/get-api-key/"
-      )))
-    }
-    
+
     # Verify if the provided API key is valid.
     test_api_query <- NULL
     tryCatch(
@@ -99,21 +96,28 @@ check_gmaps_key <- function(gmaps_key = NULL) {
       },
       warning = function(w) {
         message(
-          paste0(gsub("\'US\'", "", w$message))
+          paste0(
+            gsub("\'US\'", "", w$message),
+            "Get the key here https://developers.google.com/maps/documentation/maps-static/get-api-key/"
+          )
         )
       },
       error = function(e) {
         message(e)
       }
     )
-    
-    if (is.null(test_api_query)) {
-      stop(
+    if (!is.null(test_api_query)) {
+      return(TRUE)
+    }
+  } else {
+    if (!quiet) {
+      message(
         paste0(
-          "Hint: See `ggmap::register_google()` or provide a valid key",
-          " in the `gmaps_key` parameter."
+          "API key not provided in `gmaps_key`. ",
+          "Proceeding without the coordinates."
         )
       )
     }
+    return(FALSE)
   }
 }

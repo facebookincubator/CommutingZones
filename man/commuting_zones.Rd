@@ -9,6 +9,7 @@ commuting_zones(
   location_col_name,
   country_col_name,
   gmaps_key = NULL,
+  quiet = FALSE,
   ...
 )
 }
@@ -22,6 +23,8 @@ commuting_zones(
 long match easier.}
 
 \item{gmaps_key}{string containing your Google Maps API key.}
+
+\item{quiet}{Boolean. Keep quiet? If not, show warnings and messages.}
 
 \item{...}{Additional parameters}
 }

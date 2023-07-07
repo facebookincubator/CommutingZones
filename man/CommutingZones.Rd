@@ -16,6 +16,7 @@ Authors:
   \item Nicolas Cruces \email{nicolascruces1994@gmail.com}
   \item Arturo Esquerra \email{aesquerrac@gmail.com}
   \item Gufeng Zhou \email{gufeng@meta.com}
+  \item Bernardo Lares \email{laresbernardo@gmail.com}
 }
 
 Other contributors:

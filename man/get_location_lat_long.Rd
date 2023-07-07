@@ -14,7 +14,7 @@ get_location_lat_long(
   ...
 )
 
-check_gmaps_key(gmaps_key = NULL)
+check_gmaps_key(gmaps_key = NULL, quiet = FALSE)
 }
 \arguments{
 \item{data}{dataset that holds locations that will be used.}

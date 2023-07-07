@@ -37,13 +37,16 @@ commuting_zones <- function(
     location_col_name,
     country_col_name,
     gmaps_key = NULL,
+    quiet = FALSE,
     ...) {
   location_data <- get_location_lat_long(
     data,
     location_col_name,
     country_col_name,
     gmaps_key,
-    ...)
+    quiet,
+    ...
+  )
 
   country_name <- unique(data[, country_col_name])
 
@@ -51,7 +54,9 @@ commuting_zones <- function(
 
   matched_df_list <- location_to_cluster_match(
     location_data,
-    cluster_data
+    cluster_data,
+    quiet = quiet,
+    ...
   )
 
   return(matched_df_list)
@@ -104,6 +109,7 @@ filter_cluster_file <- function(country_name) {
 #' object that has the points that are joined to form that cluster.
 #' @param longitude_col_name,latitude_col_name Character. Names of the columns
 #' containing the longitude and latitud coordinates in \code{location_data}.
+#' @inheritParams get_location_lat_long
 #'
 #' @return
 #' A data frame where each row represents a location in \code{location_data}
@@ -121,7 +127,7 @@ filter_cluster_file <- function(country_name) {
 #'   country_col_name = "country"
 #' )
 #' cluster_file <- filter_cluster_file(country_name = "United States")
-#' 
+#'
 #' matched_df <- location_to_cluster_match(
 #'   location_df, cluster_file
 #' )
@@ -129,14 +135,16 @@ location_to_cluster_match <- function(
     location_data,
     cluster_data,
     longitude_col_name = "longitude",
-    latitude_col_name = "latitude"){
+    latitude_col_name = "latitude",
+    quiet = FALSE,
+    ...) {
   spdf <- sf::st_as_sf(
     cluster_data[, !colnames(cluster_data) %in% c("country")]
   )
   spdf <- spdf[sf::st_is_valid(spdf), ]
 
   if (all(c(longitude_col_name, latitude_col_name) %in%
-          colnames(location_data))) {
+    colnames(location_data))) {
     location_data <- sf::st_as_sf(
       location_data,
       coords = c(longitude_col_name, latitude_col_name)
@@ -144,7 +152,7 @@ location_to_cluster_match <- function(
     matched_spdf <- sf::st_join(
       location_data, spdf
     )
-    post_msgs(matched_spdf) 
+    if (!quiet) post_msgs(matched_spdf)
   } else {
     matched_spdf <- NULL
   }

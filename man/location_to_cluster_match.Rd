@@ -9,7 +9,9 @@ location_to_cluster_match(
   location_data,
   cluster_data,
   longitude_col_name = "longitude",
-  latitude_col_name = "latitude"
+  latitude_col_name = "latitude",
+  quiet = FALSE,
+  ...
 )
 
 \method{plot}{location_to_cluster_match}(x, ...)
@@ -25,9 +27,11 @@ object that has the points that are joined to form that cluster.}
 \item{longitude_col_name, latitude_col_name}{Character. Names of the columns
 containing the longitude and latitud coordinates in \code{location_data}.}
 
-\item{x}{\code{location_to_cluster_match()} output.}
+\item{quiet}{Boolean. Keep quiet? If not, show warnings and messages.}
 
 \item{...}{additional arguments}
+
+\item{x}{\code{location_to_cluster_match()} output.}
 }
 \value{
 A data frame where each row represents a location in \code{location_data}
