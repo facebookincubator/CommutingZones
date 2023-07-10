@@ -28,6 +28,7 @@ matched_df <- commuting_zones(
   data = location_df,
   location_col_name = 'location',
   country_col_name = 'country',
+  # Required only to add coordinates information
   gmaps_key = 'Enter the Google Maps API key here'
 )
 

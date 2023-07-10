@@ -9,10 +9,12 @@ get_location_lat_long(
   data,
   location_col_name = "location",
   country_col_name = "country",
-  gmaps_key = ""
+  gmaps_key = NULL,
+  quiet = FALSE,
+  ...
 )
 
-check_gmaps_key(gmaps_key = "")
+check_gmaps_key(gmaps_key = NULL, quiet = FALSE)
 }
 \arguments{
 \item{data}{dataset that holds locations that will be used.}
@@ -24,6 +26,10 @@ check_gmaps_key(gmaps_key = "")
 long match easier.}
 
 \item{gmaps_key}{string containing your Google Maps API key.}
+
+\item{quiet}{Boolean. Keep quiet? If not, show warnings and messages.}
+
+\item{...}{Additional parameters}
 }
 \description{
 Find location latitude and longitude using Gmaps API.
@@ -39,7 +45,7 @@ df <- get_location_lat_long(
   df,
   location_col_name = "location",
   country_col_name = "country",
-  gmaps_key = "" # Or change for valid key.
+  gmaps_key = NULL # Or change for valid key.
 )
 }
 }
