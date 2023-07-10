@@ -26,7 +26,7 @@
 #'   data = location_df,
 #'   location_col_name = "location",
 #'   country_col_name = "country",
-#'   gmaps_key = "Enter Your Google API Key Here" # Not required
+#'   gmaps_key = NULL # Not required
 #' )
 #'
 #' head(matched_df$matched_spdf)
@@ -127,10 +127,11 @@ filter_cluster_file <- function(country_name) {
 #'   country_col_name = "country"
 #' )
 #' cluster_file <- filter_cluster_file(country_name = "United States")
-#'
-#' matched_df <- location_to_cluster_match(
-#'   location_df, cluster_file
-#' )
+#' 
+#' # Note: location_df must contain latitude and longitude
+#' # matched_df <- location_to_cluster_match(
+#' #   location_df, cluster_file
+#' # )
 location_to_cluster_match <- function(
     location_data,
     cluster_data,
@@ -154,7 +155,17 @@ location_to_cluster_match <- function(
     )
     if (!quiet) post_msgs(matched_spdf)
   } else {
-    matched_spdf <- NULL
+    stop(
+      paste0(
+        "Longitude column under the name '", 
+        longitude_col_name, 
+        "' or latitude column under the name '", 
+        latitude_col_name, 
+        "' were not found in the location dataset.",
+        " Consider manually adding coordinates to locations or including your",
+        " GMaps API key by editing the `gmaps_key` parameter."
+      )
+    )
   }
   output <- list(
     matched_spdf = matched_spdf,

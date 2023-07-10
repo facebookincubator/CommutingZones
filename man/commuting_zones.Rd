@@ -47,7 +47,7 @@ matched_df <- commuting_zones(
   data = location_df,
   location_col_name = "location",
   country_col_name = "country",
-  gmaps_key = "Enter Your Google API Key Here" # Not required
+  gmaps_key = NULL # Not required
 )
 
 head(matched_df$matched_spdf)

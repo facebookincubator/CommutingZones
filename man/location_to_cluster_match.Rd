@@ -53,7 +53,8 @@ location_df <- get_location_lat_long(
 )
 cluster_file <- filter_cluster_file(country_name = "United States")
 
-matched_df <- location_to_cluster_match(
-  location_df, cluster_file
-)
+# Note: location_df must contain latitude and longitude
+# matched_df <- location_to_cluster_match(
+#   location_df, cluster_file
+# )
 }

@@ -86,36 +86,53 @@ check_gmaps_key <- function(gmaps_key = NULL, quiet = FALSE) {
   # Test the provided key
   if (isTRUE(nchar(gmaps_key) > 0)) {
     # Register API Key
-    ggmap::register_google(key = gmaps_key)
-
-    # Verify if the provided API key is valid.
-    test_api_query <- NULL
-    tryCatch(
-      {
-        test_api_query <- suppressMessages(ggmap::geocode("US"))
-      },
-      warning = function(w) {
-        message(
-          paste0(
-            gsub("\'US\'", "", w$message),
-            "Get the key here https://developers.google.com/maps/documentation/maps-static/get-api-key/"
-          )
-        )
-      },
-      error = function(e) {
-        message(e)
-      }
-    )
-    if (!is.null(test_api_query)) {
-      return(TRUE)
+    if (!quiet){
+      message("Registering Gmaps API key.")
     }
-  } else {
+    ggmap::register_google(key = gmaps_key)
+  }
+  
+  if (!ggmap::has_google_key()) {
     if (!quiet) {
       message(
         paste0(
-          "API key not provided in `gmaps_key`. ",
-          "Proceeding without the coordinates."
+          "API key not provided in `gmaps_key` nor was it previously registered.",
+          "\nCoordinates for locations will not be filled in using the GMaps API."
         )
+      )
+    }
+    return(FALSE)
+  } else {
+    if (!quiet & is.null(gmaps_key)){
+      message("Gmaps API key is already registered.")
+    }
+  }
+  
+  # Verify if the provided API key is valid.
+  test_api_query <- NULL
+  tryCatch(
+    {
+      test_api_query <- suppressMessages(ggmap::geocode("US"))
+    },
+    warning = function(w) {
+      url <- "https://developers.google.com/maps/documentation/maps-static/get-api-key/"
+      message(
+        paste0(
+          gsub("\'US\'", "", w$message),
+          "Get the key here: ", url
+        )
+      )
+    },
+    error = function(e) {
+      message(e)
+    }
+  )
+  if (!is.null(test_api_query)) {
+    return(TRUE)
+  } else {
+    if (!quiet) {
+      message(
+        "To use this method, you need to register a valid GMaps API key.\n"
       )
     }
     return(FALSE)
